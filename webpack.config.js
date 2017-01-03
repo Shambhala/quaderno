@@ -1,11 +1,11 @@
-var path = require('path');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var app_dir = path.join(__dirname, 'src');
-var build_dir = path.join(__dirname, 'dist');
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const appDir = path.join(__dirname, 'src');
+const buildDir = path.join(__dirname, 'dist');
 
 module.exports = {
-    context: app_dir,
+    context: appDir,
     entry: [
       'webpack-dev-server/client?http://localhost:8888',
       'webpack/hot/only-dev-server',
@@ -14,7 +14,7 @@ module.exports = {
     ],
     output: {
         filename: '[name].js',
-        path: build_dir,
+        path: buildDir,
         publicPath: '/'
     },
     resolve: {

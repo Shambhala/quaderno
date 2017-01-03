@@ -1,7 +1,7 @@
 const path = require('path');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 var StatsPlugin = require('stats-webpack-plugin');
 var appDir = path.join(__dirname, 'src');
 var buildDir = path.join(__dirname, 'dist');
@@ -44,7 +44,7 @@ module.exports = {
             }, {
                 test: /\.json?$/,
                 loader: 'json'
-            },{
+            }, {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'babel'
@@ -66,7 +66,17 @@ module.exports = {
        * change name because the hash part changes. We want hash name changes to bust cache
        * on client browsers.
        */
-        new HtmlWebpackPlugin({template: 'index.template.ejs', inject: 'body'}),
+        new HtmlWebpackPlugin({
+            template: 'index.template.ejs',
+            cache: true,
+            minify: {
+                //removeEmptyElements: true,
+                removeComments: true,
+                removeCDATASectionsFromCDATA: true,
+                collapseWhitespace: true
+            },
+            inject: 'body'
+        }),
         /**
        *  extracts the css from the js files and puts them on a separate .css file. this is for
        *  performance and is used in prod environments. Styles load faster on their own .css
@@ -76,7 +86,7 @@ module.exports = {
 
         // handles uglifying js
         new webpack.optimize.UglifyJsPlugin({
-           minimize: true,
+            minimize: true,
             compress: {
                 unused: true,
                 dead_code: true,
