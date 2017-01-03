@@ -1,0 +1,75 @@
+{
+  "name": "quaderno",
+  "version": "0.0.1",
+  "description": "It is a playbook for generating and testing d3 visualizations",
+  "keywords": [
+    "playbook",
+    "visualization",
+    "chart",
+    "d3"
+  ],
+  "homepage": "https://github.com/Shambhala/quaderno#readme",
+  "bugs": {
+    "url": "https://github.com/Shambhala/quaderno/issues"
+  },
+  "license": "MIT",
+  "author": "Shambhala",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shambhala/quaderno.git"
+  },
+  "scripts": {
+    "build:client:dev": "webpack --config ./webpack.config.js --colors",
+    "build:dev": "npm run build:client:dev",
+    "build:client:prod": "webpack --config ./webpack.production.config.js --progress --profile --colors",
+    "build:server:prod": "webpack --config ./webpack.server.config.js",
+    "build:prod": "npm run build:client:prod && npm run build:server:prod",
+    "hot": "webpack-dev-server --progress --profile --colors --inline --hot --port 8888 --history-api-fallback",
+    "clean": "rimraf dist",
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:dev": "npm run clean && npm run build:dev && npm run open:dev && npm run serve:dev",
+    "start:prod": "npm run clean && npm run build:prod && npm run open:prod && npm run serve:prod",
+    "open:dev": "open -a Google\\ Chrome http://localhost:8888",
+    "open:prod": "open -a Google\\ Chrome http://localhost:8080",
+    "serve:dev": "webpack-dev-server --colors --inline --hot --content-base dist --history-api-fallback --port 8888",
+    "serve:prod": "node server.bundle.js",
+    "eslint": "eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "compression": "^1.6.2",
+    "d3": "^4.4.0",
+    "express": "^4.14.0",
+    "if-env": "^1.0.0",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-hot-loader": "^3.0.0-beta.6",
+    "react-router": "^3.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-polyfill": "^6.20.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "css-loader": "^0.26.1",
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.8.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "html-webpack-plugin": "^2.24.1",
+    "json-loader": "^0.5.4",
+    "node-sass": "^4.1.1",
+    "rimraf": "^2.5.4",
+    "sass-loader": "^4.1.1",
+    "stats-webpack-plugin": "^0.4.2",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.2"
+  }
+}
